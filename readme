@@ -38,14 +38,6 @@ This project implements a custom QUIC-based protocol to simulate a video streami
     python3 client/client.py --host 127.0.0.1 --port 9000
     ```
 
-## Screenshots
-Server Side-
-
-![alt text](image.png)
-
-Client Side-
-![alt text](image.png)
-
 
 Sample Output (client side)-
 Sending message type 1 with payload:
