@@ -50,9 +50,9 @@ async def main(host, port):
                 line = await reader.readline()
                 if not line:
                     break
-                print("📨 Server:", line.decode().strip())
+                print(" Server:", line.decode().strip())
 
-            print("🔚 Stream closed by server.")
+            print("Stream closed by server.")
 
     except Exception as e:
         print(" Connection or stream error occurred.")

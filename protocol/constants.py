@@ -9,7 +9,7 @@ class ProtocolState(Enum):
     STREAMING = auto()
     TERMINATED = auto()
 
-class MessageType:
+class MessageType:  
     HELLO = 0x01
     AUTH = 0x02
     STREAM_START = 0x04
