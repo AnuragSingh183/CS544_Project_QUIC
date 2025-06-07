@@ -9,12 +9,13 @@ from protocol.constants import *
 from protocol.handler import handle_message
 from protocol.dfa import ProtocolState
 
-
+# Define the server-side QUIC protocol handler
 class QStreamServerProtocol(QuicConnectionProtocol):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.state = ProtocolState.INIT
 
+    # This method handles individual bidirectional streams from clients
     async def stream_handler(self, stream_id, reader, writer):
         print(f"🔌 New stream opened: {stream_id}")
         try:
@@ -28,6 +29,8 @@ class QStreamServerProtocol(QuicConnectionProtocol):
                 self.state = new_state
                 writer.write(response + b"\n")
                 await writer.drain()
+                
+                 # Terminate the connection if protocol reaches final state
                 if new_state == ProtocolState.TERMINATED:
                     break
         except Exception as e:
