@@ -1,0 +1,78 @@
+# CS544 Final Project – QUIC Protocol Streaming Simulation
+
+## Overview
+This project implements a custom QUIC-based protocol to simulate a video streaming workflow using defined protocol messages and state transitions.
+
+## Features
+- QUIC-based client-server communication
+- Custom protocol messages (HELLO, AUTH, STREAM_START, PLAYBACK_CTRL, STOP, ERROR)
+- DFA-based protocol state validation (INIT → AUTHENTICATED → STREAMING → TERMINATED)
+- Hardcoded user authentication (`admin:pass123`)
+- Simulated playback controls
+- Full error handling and validation
+
+## Folder Structure
+- `client/` – QUIC client sending protocol messages
+- `server/` – QUIC server receiving, validating, and responding
+- `protocol/` – Message types, state machine (DFA), and message handler logic
+
+## How to Run
+
+1. **Install dependencies**:
+    ```bash
+    pip install aioquic
+    ```
+
+2. **Generate self-signed cert (if not included)**:
+    ```bash
+    openssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem -days 365
+    ```
+
+3. **Start the server**:
+    ```bash
+    python3 server/server.py
+    ```
+
+4. **Run the client**:
+    ```bash
+    python3 client/client.py --host 127.0.0.1 --port 9000
+    ```
+
+## Screenshots
+Server Side-
+
+![alt text](image.png)
+
+Client Side-
+![alt text](image-2.png)
+
+
+Sample Output (client side)-
+Sending message type 1 with payload:
+Sending message type 2 with payload: admin:pass123
+Sending message type 4 with payload:
+Sending message type 5 with payload:
+Sending message type 8 with payload:
+
+Message Exchanges
+
+HELLO (Type 1): Starts the session.
+Sending message type 1 with payload:
+
+AUTH (Type 2): Sends login credentials (admin:pass123).
+Sending message type 2 with payload: admin:pass123
+
+STREAM_START (Type 4): Begins the simulated media streaming session.
+Sending message type 4 with payload:
+
+PLAYBACK_CTRL (Type 5): Sends a control command such as play or pause.
+Sending message type 5 with payload:
+
+STOP (Type 8): Gracefully stops the session.
+Sending message type 8 with payload:
+
+Server Responses
+
+## Author
+Anurag Singh – CS544 Computer Networks – Drexel University
+

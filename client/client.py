@@ -10,7 +10,7 @@ from aioquic.quic.configuration import QuicConfiguration
 from protocol.constants import *
 
 async def send_message(writer, msg_type, payload=b""):
-    print(f"🟡 Sending message type {msg_type} with payload: {payload.decode(errors='ignore')}")
+    print(f"Sending message type {msg_type} with payload: {payload.decode(errors='ignore')}")
     writer.write(msg_type.to_bytes(1, 'big') + payload.ljust(64, b' '))
     await writer.drain()
 
@@ -24,10 +24,10 @@ async def main(host, port):
 
     try:
         async with connect(host, port, configuration=config) as client:
-            print("✅ Connected to QUIC server.")
+            print("Connected to QUIC server.")
             stream_id = client._quic.get_next_available_stream_id()
             reader, writer = await client.create_stream(stream_id)
-            print(f"📶 Stream {stream_id} opened.")
+            print(f"Stream {stream_id} opened.")
 
             await send_message(writer, MessageType.HELLO)
             await asyncio.sleep(0.5)
@@ -55,7 +55,7 @@ async def main(host, port):
             print("🔚 Stream closed by server.")
 
     except Exception as e:
-        print("❌ Connection or stream error occurred.")
+        print(" Connection or stream error occurred.")
         traceback.print_exc()
 
 if __name__ == "__main__":
